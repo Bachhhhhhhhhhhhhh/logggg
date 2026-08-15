@@ -4,6 +4,8 @@ Internal dashboard for an **agentic knowledge memory graph** — a local, demo-r
 
 This first version is a complete frontend. It runs against a structured JSON snapshot so you can demo, teach, and iterate on the UX immediately. The data contract is the same one a real graph backend should emit later.
 
+**Live demo:** [https://Bachhhhhhhhhhhhhh.github.io/logggg/](https://Bachhhhhhhhhhhhhh.github.io/logggg/)
+
 ## Run
 
 ```bash

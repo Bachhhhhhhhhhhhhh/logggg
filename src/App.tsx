@@ -30,7 +30,9 @@ export default function App() {
   useEffect(() => startLiveEngine(), [])
 
   useEffect(() => {
-    if (drawerNodeId) history.replaceState(null, '', `#n=${drawerNodeId}`)
+    if (drawerNodeId) {
+      history.replaceState(null, '', `${location.pathname}${location.search}#n=${drawerNodeId}`)
+    }
   }, [drawerNodeId])
 
   return (
