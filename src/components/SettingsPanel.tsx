@@ -21,14 +21,14 @@ export function SettingsPanel() {
   if (!open) return null
 
   return (
-    <div className="fixed inset-0 z-[55] flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[55] flex items-end justify-center p-0 md:items-center md:p-4">
       <button
         type="button"
         className="absolute inset-0 bg-black/65"
         aria-label="Close settings"
         onClick={() => setSettingsOpen(false)}
       />
-      <div className="relative w-full max-w-md rounded-2xl border border-accent/20 bg-panel p-5">
+      <div className="relative max-h-[90dvh] w-full max-w-md overflow-auto rounded-t-2xl border border-accent/20 bg-panel p-5 md:rounded-2xl">
         <div className="text-[10px] tracking-[0.22em] text-accent uppercase">Console</div>
         <h2 className="font-display mt-1 text-[28px] leading-none">Settings</h2>
         <div className="mt-5 space-y-4 text-[13px]">

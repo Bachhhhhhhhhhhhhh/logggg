@@ -27,7 +27,7 @@ export function JobsView() {
   const ok = jobs.filter((j) => j.status === 'completed').length
 
   return (
-    <div className="relative h-full min-h-0 overflow-auto bg-paper px-6 py-5 scrollbar-thin">
+    <div className="relative h-full min-h-0 overflow-auto bg-paper px-3 py-4 scrollbar-thin md:px-6 md:py-5">
       <div className="mb-5 flex flex-wrap items-end justify-between gap-4">
         <div>
           <div className="text-[10px] tracking-[0.22em] text-accent uppercase">Pipelines</div>
@@ -44,7 +44,7 @@ export function JobsView() {
         </div>
       </div>
 
-      <div className="overflow-hidden rounded-2xl border border-line bg-panel">
+      <div className="overflow-x-auto rounded-2xl border border-line bg-panel">
         <table className="w-full border-collapse text-left text-[13px]">
           <thead className="bg-black/20 text-[10.5px] tracking-[0.14em] text-faint uppercase">
             <tr>

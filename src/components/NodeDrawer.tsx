@@ -51,14 +51,14 @@ export function NodeDrawer() {
       : neighbors.reduce((s, n) => s + n.weight, 0) / neighbors.length
 
   return (
-    <div className="pointer-events-none absolute inset-0 z-20 flex justify-end">
+    <div className="pointer-events-none absolute inset-0 z-20 flex items-end justify-end md:items-stretch">
       <button
         type="button"
         aria-label="Close details"
         className="pointer-events-auto h-full flex-1 bg-black/40"
         onClick={closeDrawer}
       />
-      <aside className="pointer-events-auto flex h-full w-[400px] flex-col border-l border-accent/15 bg-[#0a0c12] shadow-[-24px_0_80px_rgba(0,0,0,0.45)]">
+      <aside className="pointer-events-auto flex max-h-[82dvh] w-full flex-col rounded-t-2xl border-t border-accent/15 bg-[#0a0c12] shadow-[-24px_0_80px_rgba(0,0,0,0.45)] md:max-h-none md:w-[400px] md:rounded-none md:border-t-0 md:border-l">
         <div className="relative overflow-hidden border-b border-line px-5 py-5">
           <div
             className="absolute inset-0 opacity-50"

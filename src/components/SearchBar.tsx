@@ -101,14 +101,14 @@ export function SearchBar() {
   if (!open) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center px-4 pt-[14vh]">
+    <div className="fixed inset-0 z-50 flex items-end justify-center px-3 pt-6 pb-[max(12px,env(safe-area-inset-bottom))] md:items-start md:px-4 md:pt-[14vh] md:pb-0">
       <button
         type="button"
         aria-label="Close search"
         className="absolute inset-0 bg-black/65 backdrop-blur-sm"
         onClick={() => setSearchOpen(false)}
       />
-      <div className="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-accent/20 bg-panel shadow-[0_40px_120px_rgba(0,0,0,0.55)]">
+      <div className="relative max-h-[86dvh] w-full max-w-2xl overflow-hidden rounded-2xl border border-accent/20 bg-panel shadow-[0_40px_120px_rgba(0,0,0,0.55)]">
         <form
           onSubmit={(e) => {
             e.preventDefault()

@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { AtlasOverlay } from './components/AtlasOverlay'
+import { BottomNav } from './components/BottomNav'
 import { BootScreen } from './components/BootScreen'
 import { CommunitiesView } from './components/CommunitiesView'
 import { DevWorkView } from './components/DevWorkView'
@@ -36,22 +37,27 @@ export default function App() {
   }, [drawerNodeId])
 
   return (
-    <div className="flex h-full flex-col bg-paper text-ink">
+    <div className="flex h-full min-h-0 flex-col overflow-hidden bg-paper text-ink">
       <BootScreen />
       {!cinema && <Header />}
       <div className="flex min-h-0 flex-1">
-        {!cinema && <IconRail />}
+        {!cinema && (
+          <div className="hidden md:flex">
+            <IconRail />
+          </div>
+        )}
         <div className="flex min-w-0 flex-1 flex-col">
-          <main className="relative min-h-0 flex-1">
+          <main className="relative min-h-0 flex-1 overflow-hidden">
             {tab === 'graph' && <GraphView />}
             {tab === 'knowledge' && <KnowledgeView />}
             {tab === 'communities' && <CommunitiesView />}
             {tab === 'devwork' && <DevWorkView />}
             {tab === 'jobs' && <JobsView />}
           </main>
-          {!cinema && <Ticker />}
+          {!cinema && <div className="hidden md:block"><Ticker /></div>}
         </div>
       </div>
+      {!cinema && <BottomNav />}
       {cinema && (
         <div className="pointer-events-none absolute bottom-3 left-1/2 z-40 -translate-x-1/2 font-mono text-[10px] tracking-[0.22em] text-faint uppercase">
           Esc exit cinema

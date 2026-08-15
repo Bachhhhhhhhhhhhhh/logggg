@@ -9,7 +9,7 @@ export function AlertRail() {
   const open = alerts.filter((a) => !a.acked)
 
   return (
-    <aside className="flex w-[210px] shrink-0 flex-col border-r border-line bg-panel/90">
+    <aside className="flex h-full w-full shrink-0 flex-col border-line bg-panel/90 md:w-[210px] md:border-r">
       <div className="flex items-center justify-between border-b border-line px-3 py-2">
         <div>
           <div className="text-[9px] tracking-[0.2em] text-accent uppercase">Inbox</div>

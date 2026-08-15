@@ -5,7 +5,7 @@ export function ToastHost() {
   const dismissToast = useMemoryStore((s) => s.dismissToast)
   if (!toasts.length) return null
   return (
-    <div className="pointer-events-none fixed right-4 bottom-10 z-[70] flex w-72 flex-col gap-2">
+    <div className="pointer-events-none fixed right-3 bottom-20 z-[70] flex w-[min(18rem,calc(100vw-1.5rem))] flex-col gap-2 md:right-4 md:bottom-10">
       {toasts.map((t) => (
         <button
           key={t.id}

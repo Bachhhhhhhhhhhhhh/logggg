@@ -10,7 +10,7 @@ export function CommunitiesView() {
   const focusCommunity = useMemoryStore((s) => s.focusCommunity)
 
   return (
-    <div className="relative h-full min-h-0 overflow-auto bg-paper px-6 py-5 scrollbar-thin">
+    <div className="relative h-full min-h-0 overflow-auto bg-paper px-3 py-4 scrollbar-thin md:px-6 md:py-5">
       <div className="noise absolute inset-0 opacity-[0.03]" />
       <div className="relative mb-6 flex items-end justify-between gap-4">
         <div>
@@ -36,7 +36,7 @@ export function CommunitiesView() {
           return (
             <article
               key={c.id}
-              className="rise flex gap-4 rounded-2xl border border-line bg-panel p-4 hover:border-accent/25"
+              className="rise flex flex-col gap-4 rounded-2xl border border-line bg-panel p-4 hover:border-accent/25 sm:flex-row"
               style={{ animationDelay: `${i * 40}ms` }}
             >
               <Constellation members={members} />

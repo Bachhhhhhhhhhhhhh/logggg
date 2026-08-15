@@ -39,7 +39,7 @@ export function SidePanel() {
     selectedIds.length >= 2 ? strongestPath(links, selectedIds[0], selectedIds[1]) : null
 
   return (
-    <aside className="flex h-full w-[300px] shrink-0 flex-col border-l border-line bg-panel/95">
+    <aside className="flex h-full w-full shrink-0 flex-col border-line bg-panel/95 md:w-[300px] md:border-l">
       <div className="flex gap-0.5 overflow-x-auto border-b border-line px-2 py-2 scrollbar-thin">
         {TABS.map((t) => (
           <button

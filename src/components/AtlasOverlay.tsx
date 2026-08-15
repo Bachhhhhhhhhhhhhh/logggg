@@ -35,14 +35,14 @@ export function AtlasOverlay() {
   if (!open) return null
 
   return (
-    <div className="fixed inset-0 z-[55] flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[55] flex items-end justify-center p-0 md:items-center md:p-4">
       <button
         type="button"
         className="absolute inset-0 bg-black/70"
         aria-label="Close atlas"
         onClick={() => setAtlasOpen(false)}
       />
-      <div className="relative flex h-[78vh] w-full max-w-4xl flex-col overflow-hidden rounded-2xl border border-accent/20 bg-panel">
+      <div className="relative flex h-[92dvh] w-full max-w-4xl flex-col overflow-hidden rounded-t-2xl border border-accent/20 bg-panel md:h-[78vh] md:rounded-2xl">
         <div className="flex flex-wrap items-center gap-2 border-b border-line px-4 py-3">
           <div>
             <div className="text-[10px] tracking-[0.2em] text-accent uppercase">Index</div>

@@ -24,9 +24,9 @@ export function KnowledgeView() {
   const rest = items.slice(1)
 
   return (
-    <div className="relative flex h-full min-h-0 flex-col bg-paper">
+    <div className="relative flex h-full min-h-0 flex-col overflow-hidden bg-paper">
       <div className="noise absolute inset-0 opacity-[0.03]" />
-      <div className="relative flex flex-wrap items-center gap-2 border-b border-line px-6 py-3">
+      <div className="relative flex flex-wrap items-center gap-2 border-b border-line px-3 py-3 md:px-6">
         <div>
           <div className="text-[10px] tracking-[0.22em] text-accent uppercase">Distilled</div>
           <div className="font-display text-[26px] leading-none">Knowledge</div>
@@ -35,7 +35,7 @@ export function KnowledgeView() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Filter learnings…"
-          className="ml-4 h-9 w-64 rounded-lg border border-line bg-panel px-3 text-[12.5px] text-ink outline-none placeholder:text-faint focus:border-accent"
+          className="h-10 w-full rounded-lg border border-line bg-panel px-3 text-ink outline-none placeholder:text-faint focus:border-accent md:ml-4 md:h-9 md:w-64 md:text-[12.5px]"
         />
         <div className="flex flex-wrap gap-1">
           <FilterChip active={filter === 'all'} onClick={() => setFilter('all')} label="All" />
@@ -52,7 +52,7 @@ export function KnowledgeView() {
         <span className="ml-auto font-mono text-[12px] text-muted">{items.length}</span>
       </div>
 
-      <div className="relative min-h-0 flex-1 overflow-auto px-6 py-5 scrollbar-thin">
+      <div className="relative min-h-0 flex-1 overflow-auto px-3 py-4 scrollbar-thin md:px-6 md:py-5">
         {featured && (
           <article className="rise relative mb-4 overflow-hidden rounded-2xl border border-accent/20 bg-gradient-to-br from-[#1a160f] to-[#0c0e14] p-6">
             <div
@@ -65,7 +65,7 @@ export function KnowledgeView() {
               <div className="text-[10.5px] tracking-[0.18em] text-accent uppercase">
                 Latest · {CATEGORY_META[featured.category].short}
               </div>
-              <p className="font-display mt-3 max-w-3xl text-[26px] leading-snug text-ink">
+              <p className="font-display mt-3 max-w-3xl text-[20px] leading-snug text-ink md:text-[26px]">
                 {featured.text}
               </p>
               <div className="mt-4 flex flex-wrap gap-1.5">

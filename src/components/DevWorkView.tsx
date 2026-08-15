@@ -14,7 +14,7 @@ export function DevWorkView() {
   const events = useMemoryStore((s) => s.devwork)
 
   return (
-    <div className="relative h-full min-h-0 overflow-auto bg-paper px-6 py-5 scrollbar-thin">
+    <div className="relative h-full min-h-0 overflow-auto bg-paper px-3 py-4 scrollbar-thin md:px-6 md:py-5">
       <div className="mb-6">
         <div className="text-[10px] tracking-[0.22em] text-accent uppercase">Changelog</div>
         <h2 className="font-display text-[30px] leading-none">Dev work</h2>

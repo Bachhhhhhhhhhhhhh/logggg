@@ -59,6 +59,7 @@ export function GraphView() {
   const touring = useMemoryStore((s) => s.touring)
   const setTouring = useMemoryStore((s) => s.setTouring)
   const particles = useMemoryStore((s) => s.particles)
+  const setParticles = useMemoryStore((s) => s.setParticles)
   const toggleBookmark = useMemoryStore((s) => s.toggleBookmark)
   const setAtlasOpen = useMemoryStore((s) => s.setAtlasOpen)
   const setSettingsOpen = useMemoryStore((s) => s.setSettingsOpen)
@@ -68,6 +69,7 @@ export function GraphView() {
   const lastEvent = useMemoryStore((s) => s.liveEvents[0])
   const [positions, setPositions] = useState<MiniPos[]>([])
   const [refit, setRefit] = useState(0)
+  const [sheet, setSheet] = useState<null | 'live' | 'alerts'>(null)
   const toggleSelect = useMemoryStore((s) => s.toggleSelect)
   const openNode = useMemoryStore((s) => s.openNode)
   const setHovered = useMemoryStore((s) => s.setHovered)
@@ -102,6 +104,16 @@ export function GraphView() {
     for (const n of nodes) counts[n.category] += 1
     return counts
   }, [nodes])
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    if (mq.matches) {
+      setGraphMode('2d')
+      setAutoRotate(false)
+      setCinema(false)
+      setParticles(false)
+    }
+  }, [setAutoRotate, setCinema, setGraphMode, setParticles])
 
   useEffect(() => {
     if (!touring) return
@@ -188,15 +200,23 @@ export function GraphView() {
 
   return (
     <div className="relative flex h-full min-h-0 flex-col">
-      {!cinema && <CommandStrip />}
+      {!cinema && (
+        <div className="hidden md:block">
+          <CommandStrip />
+        </div>
+      )}
       <div className="relative flex min-h-0 flex-1">
-      {!cinema && <AlertRail />}
+      {!cinema && (
+        <div className="hidden md:flex">
+          <AlertRail />
+        </div>
+      )}
       <div className="relative min-w-0 flex-1 overflow-hidden bg-canvas">
         <div className="stage-vignette absolute inset-0 z-[1]" />
         <div className="noise absolute inset-0 z-[1]" />
         <div className="scanlines absolute inset-0 z-[1]" />
 
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex items-start justify-between gap-3 p-3">
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-10 hidden items-start justify-between gap-3 p-3 md:flex">
           <div className="pointer-events-auto glass-dark max-w-lg rounded-2xl px-4 py-3">
             <div className="flex items-center justify-between gap-3">
               <div className="text-[10px] tracking-[0.22em] text-accent uppercase">
@@ -330,7 +350,54 @@ export function GraphView() {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute bottom-3 left-3 z-10 flex w-[300px] flex-col gap-2">
+        <div className="pointer-events-none absolute right-3 bottom-16 z-10 flex gap-2 md:hidden">
+          <button
+            type="button"
+            onClick={() => setSheet('alerts')}
+            className="pointer-events-auto glass-dark rounded-full px-3 py-2 text-[12px] text-ink"
+          >
+            Alerts
+          </button>
+          <button
+            type="button"
+            onClick={() => setSheet('live')}
+            className="pointer-events-auto glass-dark rounded-full px-3 py-2 text-[12px] text-accent"
+          >
+            Live
+          </button>
+          <button
+            type="button"
+            onClick={() => setGraphMode(graphMode === '2d' ? '3d' : '2d')}
+            className="pointer-events-auto glass-dark rounded-full px-3 py-2 text-[12px] uppercase"
+          >
+            {graphMode}
+          </button>
+        </div>
+
+        <div className="pointer-events-none absolute top-2 right-2 left-2 z-10 md:hidden">
+          <div className="glass-dark rounded-xl px-3 py-2">
+            <div className="flex items-center justify-between gap-2">
+              <span className="font-display text-[18px] leading-none">
+                {formatInt(nodes.length)} · {formatInt(shownLinks)}
+              </span>
+              <button
+                type="button"
+                onClick={() => setLive(!live)}
+                className="pointer-events-auto font-mono text-[10px] text-accent"
+              >
+                {live ? '● LIVE' : '○ PAUSED'}
+              </button>
+            </div>
+            <div className="mt-1 text-[11px] text-faint">
+              Pinch to zoom · tap a node · double-tap to open
+            </div>
+            {lastEvent && (
+              <div className="mt-1 truncate text-[11px] text-muted">{lastEvent.title}</div>
+            )}
+          </div>
+        </div>
+
+        <div className="pointer-events-none absolute bottom-3 left-3 z-10 hidden w-[300px] flex-col gap-2 md:flex">
           {hovered && (
             <div className="glass-dark rise rounded-2xl px-4 py-3">
               <div className="flex items-center gap-2">
@@ -470,9 +537,45 @@ export function GraphView() {
         />
         <NodeDrawer key={drawerNodeId ?? 'closed'} />
       </div>
-      {!cinema && <SidePanel />}
+      {!cinema && (
+        <div className="hidden h-full md:flex">
+          <SidePanel />
+        </div>
+      )}
       </div>
-      {!cinema && <AgentDock />}
+      {!cinema && (
+        <div className="hidden md:block">
+          <AgentDock />
+        </div>
+      )}
+
+      {sheet && (
+        <div className="fixed inset-0 z-40 md:hidden">
+          <button
+            type="button"
+            className="absolute inset-0 bg-black/55"
+            aria-label="Close sheet"
+            onClick={() => setSheet(null)}
+          />
+          <div
+            className="absolute inset-x-0 bottom-0 flex max-h-[72dvh] flex-col overflow-hidden rounded-t-2xl border-t border-line bg-panel"
+            style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
+          >
+            <div className="mx-auto mt-2 h-1 w-10 rounded-full bg-line-strong" />
+            <div className="flex items-center justify-between px-4 py-2">
+              <span className="font-display text-[22px]">
+                {sheet === 'live' ? 'Live' : 'Alerts'}
+              </span>
+              <button type="button" onClick={() => setSheet(null)} className="text-muted">
+                Close
+              </button>
+            </div>
+            <div className="min-h-0 flex-1 overflow-hidden">
+              {sheet === 'live' ? <SidePanel /> : <AlertRail />}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
